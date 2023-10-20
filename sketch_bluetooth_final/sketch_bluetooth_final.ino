@@ -2,14 +2,14 @@
 
 /* Biblioteca */
 #include <SoftwareSerial.h> /* Comandos Seriais */
-SoftwareSerial HC05(10, 11); /* TX-RX */
+SoftwareSerial HC05(0, 1); /* TX-RX */
 
 
 /* Variáveis Lógicas ON-OFF */
-int state = 0;  /*Controla o status do LED Verde */
+int state3 = 0;  /*Controla o status do LED Verde */
 int state2 = 0; /*Controla o status do LED Vermelho */
-int state3 = 0; /* Controla o status do LED Azul */
-
+int state1 = 0; /* Controla o status do LED Azul */
+int state = 0;
 /* Define a pinagem do LED */
 #define azul 4
 #define verde 3
@@ -32,18 +32,21 @@ void loop()
 
   switch (readBluetooth)
   { /* De acordo com o valor armazenado em readBluetooth */
-    case 'a': /* Caso receba o caractere 'a'*/
-      state = !state; /* substitui o valor de state entre 0 e 1 */
+    case '0':
+      digitalWrite(verde, LOW); 
+      break; 
+    case '3': /* Caso receba o caractere 'a'*/
+      state3 = !state3; /* substitui o valor de state entre 0 e 1 */
       digitalWrite(verde, state); /* state aciona ou desliga o LED */
       break; /* Fim do caso 'a' */
 
-    case 'b': /* Caso receba o caractere 'b' */
+    case '2': /* Caso receba o caractere 'b' */
       state2 = !state2; /* substitui o valor de state entre 0 e 1 */
       digitalWrite(vermelho, state2);/* state aciona ou desliga o LED */
       break; /* Fim do caso 'b'*/
 
-    case 'c': /* Caso receba o caractere 'c' */
-      state3 = !state3;/* substitui o valor de state entre 0 e 1 */
+    case '1': /* Caso receba o caractere 'c' */
+      state1 = !state1;/* substitui o valor de state entre 0 e 1 */
       digitalWrite(azul, state3);/* state aciona ou desliga o LED */
       break; /* Fim do caso 'c' */
   }
